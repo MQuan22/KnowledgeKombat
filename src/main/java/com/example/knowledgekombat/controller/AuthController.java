@@ -1,14 +1,14 @@
-package com.example.springsocial.controller;
+package com.example.knowledgekombat.controller;
 
-import com.example.springsocial.exception.BadRequestException;
-import com.example.springsocial.model.AuthProvider;
-import com.example.springsocial.model.User;
-import com.example.springsocial.payload.ApiResponse;
-import com.example.springsocial.payload.AuthResponse;
-import com.example.springsocial.payload.LoginRequest;
-import com.example.springsocial.payload.SignUpRequest;
-import com.example.springsocial.repository.UserRepository;
-import com.example.springsocial.security.TokenProvider;
+import com.example.knowledgekombat.repository.UserRepository;
+import com.example.knowledgekombat.exception.BadRequestException;
+import com.example.knowledgekombat.model.AuthProvider;
+import com.example.knowledgekombat.model.User;
+import com.example.knowledgekombat.payload.ApiResponse;
+import com.example.knowledgekombat.payload.AuthResponse;
+import com.example.knowledgekombat.payload.LoginRequest;
+import com.example.knowledgekombat.payload.SignUpRequest;
+import com.example.knowledgekombat.security.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +16,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;

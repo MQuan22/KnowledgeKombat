@@ -1,4 +1,4 @@
-package com.example.springsocial.model;
+package com.example.knowledgekombat.model;
 
 import javax.persistence.*;
 

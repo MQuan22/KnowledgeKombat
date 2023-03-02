@@ -1,7 +1,7 @@
-package com.example.springsocial.security.oauth2.user;
+package com.example.knowledgekombat.security.oauth2.user;
 
-import com.example.springsocial.exception.OAuth2AuthenticationProcessingException;
-import com.example.springsocial.model.AuthProvider;
+import com.example.knowledgekombat.exception.OAuth2AuthenticationProcessingException;
+import com.example.knowledgekombat.model.AuthProvider;
 
 import java.util.Map;
 

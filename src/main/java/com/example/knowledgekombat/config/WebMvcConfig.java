@@ -1,4 +1,4 @@
-package com.example.springsocial.config;
+package com.example.knowledgekombat.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

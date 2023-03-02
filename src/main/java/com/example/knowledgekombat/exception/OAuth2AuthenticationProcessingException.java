@@ -1,4 +1,4 @@
-package com.example.springsocial.exception;
+package com.example.knowledgekombat.exception;
 
 import org.springframework.security.core.AuthenticationException;
 

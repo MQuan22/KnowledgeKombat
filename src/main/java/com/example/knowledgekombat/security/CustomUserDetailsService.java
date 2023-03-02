@@ -1,9 +1,9 @@
-package com.example.springsocial.security;
+package com.example.knowledgekombat.security;
 
 
-import com.example.springsocial.exception.ResourceNotFoundException;
-import com.example.springsocial.model.User;
-import com.example.springsocial.repository.UserRepository;
+import com.example.knowledgekombat.exception.ResourceNotFoundException;
+import com.example.knowledgekombat.model.User;
+import com.example.knowledgekombat.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

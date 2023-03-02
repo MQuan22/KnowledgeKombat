@@ -1,8 +1,8 @@
-package com.example.springsocial.payload;
+package com.example.knowledgekombat.payload;
 
-import com.example.springsocial.model.Category;
-import com.example.springsocial.model.Question;
-import com.example.springsocial.model.University;
+import com.example.knowledgekombat.model.Category;
+import com.example.knowledgekombat.model.Question;
+import com.example.knowledgekombat.model.University;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.springsocial.model;
+package com.example.knowledgekombat.model;
 
 public enum  AuthProvider {
     local,

@@ -1,4 +1,4 @@
-package com.example.springsocial.security.oauth2.user;
+package com.example.knowledgekombat.security.oauth2.user;
 
 import java.util.Map;
 

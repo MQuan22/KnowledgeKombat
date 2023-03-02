@@ -1,6 +1,6 @@
-package com.example.springsocial.security.oauth2;
+package com.example.knowledgekombat.security.oauth2;
 
-import com.example.springsocial.util.CookieUtils;
+import com.example.knowledgekombat.util.CookieUtils;
 import com.nimbusds.oauth2.sdk.util.StringUtils;
 import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;

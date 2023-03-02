@@ -1,12 +1,12 @@
-package com.example.springsocial.security.oauth2;
+package com.example.knowledgekombat.security.oauth2;
 
-import com.example.springsocial.exception.OAuth2AuthenticationProcessingException;
-import com.example.springsocial.model.AuthProvider;
-import com.example.springsocial.model.User;
-import com.example.springsocial.repository.UserRepository;
-import com.example.springsocial.security.UserPrincipal;
-import com.example.springsocial.security.oauth2.user.OAuth2UserInfo;
-import com.example.springsocial.security.oauth2.user.OAuth2UserInfoFactory;
+import com.example.knowledgekombat.exception.OAuth2AuthenticationProcessingException;
+import com.example.knowledgekombat.model.AuthProvider;
+import com.example.knowledgekombat.model.User;
+import com.example.knowledgekombat.repository.UserRepository;
+import com.example.knowledgekombat.security.UserPrincipal;
+import com.example.knowledgekombat.security.oauth2.user.OAuth2UserInfo;
+import com.example.knowledgekombat.security.oauth2.user.OAuth2UserInfoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;

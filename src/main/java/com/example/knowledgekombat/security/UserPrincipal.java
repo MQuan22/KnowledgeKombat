@@ -1,6 +1,6 @@
-package com.example.springsocial.security;
+package com.example.knowledgekombat.security;
 
-import com.example.springsocial.model.User;
+import com.example.knowledgekombat.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

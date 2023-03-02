@@ -1,10 +1,11 @@
-package com.example.springsocial.controller;
+package com.example.knowledgekombat.controller;
 
-import com.example.springsocial.exception.ResourceNotFoundException;
-import com.example.springsocial.model.User;
-import com.example.springsocial.repository.UserRepository;
-import com.example.springsocial.security.CurrentUser;
-import com.example.springsocial.security.UserPrincipal;
+
+import com.example.knowledgekombat.exception.ResourceNotFoundException;
+import com.example.knowledgekombat.model.User;
+import com.example.knowledgekombat.repository.UserRepository;
+import com.example.knowledgekombat.security.CurrentUser;
+import com.example.knowledgekombat.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;

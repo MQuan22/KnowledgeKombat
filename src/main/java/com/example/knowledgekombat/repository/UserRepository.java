@@ -1,6 +1,6 @@
-package com.example.springsocial.repository;
+package com.example.knowledgekombat.repository;
 
-import com.example.springsocial.model.User;
+import com.example.knowledgekombat.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

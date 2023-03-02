@@ -1,14 +1,15 @@
-package com.example.springsocial.security.oauth2;
+package com.example.knowledgekombat.security.oauth2;
 
-import com.example.springsocial.config.AppProperties;
-import com.example.springsocial.exception.BadRequestException;
-import com.example.springsocial.security.TokenProvider;
-import com.example.springsocial.util.CookieUtils;
+import com.example.knowledgekombat.config.AppProperties;
+import com.example.knowledgekombat.exception.BadRequestException;
+import com.example.knowledgekombat.security.TokenProvider;
+import com.example.knowledgekombat.util.CookieUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Optional;
 
-import static com.example.springsocial.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
+import static com.example.knowledgekombat.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
 
 @Component
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {

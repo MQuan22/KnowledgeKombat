@@ -1,6 +1,6 @@
-package com.example.springsocial.security;
+package com.example.knowledgekombat.security;
 
-import com.example.springsocial.config.AppProperties;
+import com.example.knowledgekombat.config.AppProperties;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

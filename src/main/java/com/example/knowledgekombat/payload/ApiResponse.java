@@ -1,4 +1,4 @@
-package com.example.springsocial.payload;
+package com.example.knowledgekombat.payload;
 
 public class ApiResponse {
     private boolean success;
