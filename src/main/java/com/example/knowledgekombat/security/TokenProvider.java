@@ -35,12 +35,12 @@ public class TokenProvider {
     }
 
     public Long getUserIdFromToken(String token) {
-        Claims claims = Jwts.parser()
+        String claims = Jwts.parser()
                 .setSigningKey(appProperties.getAuth().getTokenSecret())
                 .parseClaimsJws(token)
-                .getBody();
+                .getBody().getSubject();
 
-        return Long.parseLong(claims.getSubject());
+        return Long.parseLong(claims);
     }
 
     public boolean validateToken(String authToken) {

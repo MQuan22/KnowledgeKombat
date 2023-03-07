@@ -2,28 +2,29 @@ package com.example.knowledgekombat.payload;
 
 import com.example.knowledgekombat.model.Category;
 import com.example.knowledgekombat.model.Question;
+import com.example.knowledgekombat.model.Topic;
 import com.example.knowledgekombat.model.University;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CoursePayload {
-    private int id;
+    private String name;
     private boolean status;
     private String Image;
     private String description;
-    private University university;
-    private Category category;
-    private List<Question> questions = new ArrayList<>();
+    private String university;
+    private String category;
 
+    private List<Topic> topics = new ArrayList<>();
     public CoursePayload(){}
 
-    public int getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public boolean isStatus() {
@@ -50,27 +51,27 @@ public class CoursePayload {
         this.description = description;
     }
 
-    public University getUniversity() {
+    public String getUniversity() {
         return university;
     }
 
-    public void setUniversity(University university) {
+    public void setUniversity(String university) {
         this.university = university;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
-    public List<Question> getQuestions() {
-        return questions;
+    public List<Topic> getTopics() {
+        return topics;
     }
 
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
+    public void setTopics(List<Topic> topics) {
+        this.topics = topics;
     }
 }

@@ -27,14 +27,18 @@ public class Question {
 
     private Date updatedAt;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "question")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Answer> answers = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "topic_id",referencedColumnName = "id", nullable = false)
-    @JsonIgnore
-    private Topic topic;
+    private Long topicId;
+
+    public Long getTopicId() {
+        return topicId;
+    }
+
+    public void setTopicId(Long topicId) {
+        this.topicId = topicId;
+    }
 
     public Long getId() {
         return id;
@@ -92,11 +96,5 @@ public class Question {
         this.answers = answers;
     }
 
-    public Topic getTopic() {
-        return topic;
-    }
 
-    public void setTopic(Topic topic) {
-        this.topic = topic;
-    }
 }

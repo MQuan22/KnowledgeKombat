@@ -24,6 +24,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/auth")
@@ -62,16 +64,19 @@ public class AuthController {
         if(userRepository.existsByEmail(signUpRequest.getEmail())) {
             throw new BadRequestException("Email address already in use.");
         }
-
+        Date date = new Date();
         // Creating user's account
         User user = new User();
         user.setName(signUpRequest.getName());
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(signUpRequest.getPassword());
         user.setProvider(AuthProvider.local);
+        user.setStatus(true);
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
+        user.setCreatedAt(date);
+        user.setUpdatedAt(date);
+        user.setWallet(0);
         User result = userRepository.save(user);
 
         URI location = ServletUriComponentsBuilder

@@ -24,18 +24,21 @@ public class Course {
 
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "course")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ScoreReport> scoreReports = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Topic> topics;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "uni_id",referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "uni_id",referencedColumnName = "id")
     @JsonIgnore
     private University university;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "author_id",referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "author_id",referencedColumnName = "id")
     @JsonIgnore
     private User user;
 
@@ -43,6 +46,9 @@ public class Course {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category = new Category();
 
+    public Course(){
+        topics = new ArrayList<>();
+    }
     public Long getId() {
         return id;
     }
@@ -113,5 +119,19 @@ public class Course {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public List<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<Topic> topics) {
+//        topics.forEach(topic -> topic.setCourseId(this.getId()));
+//        if(this.topics == null){
+//            topics = new ArrayList<>();
+//        }
+//        this.topics.clear();
+//        this.topics.addAll(topics);
+        this.topics = topics;
     }
 }

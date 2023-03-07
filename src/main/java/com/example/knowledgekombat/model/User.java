@@ -1,4 +1,5 @@
 package com.example.knowledgekombat.model;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -55,11 +56,13 @@ public class User {
     private List<Course> courses = new ArrayList<>();
 
     private String providerId;
-
+    @Column(name = "updatedAt", columnDefinition = "DATETIME")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private Date updatedAt;
 
     private int wallet;
-
+    @Column(name = "createdAt", columnDefinition = "DATETIME")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private Date createdAt;
 
     private boolean status;

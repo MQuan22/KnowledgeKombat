@@ -38,10 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-ui.html",
             "/v2/api-docs",
             "/webjars/**",
-            "/api/auth/**",
             "/oauth2/**",
             "/**/*swagger*/**",
-
+//            "/**/course/**"
     };
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
