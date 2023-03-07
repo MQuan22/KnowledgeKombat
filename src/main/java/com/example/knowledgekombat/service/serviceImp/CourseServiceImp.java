@@ -2,10 +2,7 @@ package com.example.knowledgekombat.service.serviceImp;
 
 import com.example.knowledgekombat.model.*;
 import com.example.knowledgekombat.payload.CoursePayload;
-import com.example.knowledgekombat.repository.CategoryRepository;
-import com.example.knowledgekombat.repository.CourseRepository;
-import com.example.knowledgekombat.repository.UniRepository;
-import com.example.knowledgekombat.repository.UserRepository;
+import com.example.knowledgekombat.repository.*;
 import com.example.knowledgekombat.security.UserPrincipal;
 import com.example.knowledgekombat.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class CourseServiceImp implements CourseService {
@@ -22,12 +20,14 @@ public class CourseServiceImp implements CourseService {
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     private final UniRepository uniRepository;
+    private final QuestionRepository questionRepository;
     @Autowired
-    public CourseServiceImp(CourseRepository courseRepository, UserRepository userRepository, CategoryRepository categoryRepository, UniRepository uniRepository ){
+    public CourseServiceImp(CourseRepository courseRepository, UserRepository userRepository, CategoryRepository categoryRepository, UniRepository uniRepository, QuestionRepository questionRepository){
         this.courseRepository = courseRepository;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
         this.uniRepository = uniRepository;
+        this.questionRepository = questionRepository;
     }
 
     @Override
@@ -49,8 +49,23 @@ public class CourseServiceImp implements CourseService {
         course.setImage(coursePayload.getImage());
         course.setUser(author);
         course.setUniversity(university);
+        course.setQuestions(coursePayload.getQuestions());
         courseRepository.save(course);
-        course.setTopics(coursePayload.getTopics());
+//        questionRepository.saveAll(coursePayload.getQuestions());
         return course;
     }
+
+    @Override
+    @Transactional
+    public List<Answer> getAnswersByQuestionId(Long Id) {
+        List<Answer> answers = questionRepository.findAnswersByQuestionId(Id);
+        return answers;
+    }
+
+    @Override
+    @Transactional
+    public List<Question> getQuestionsByCourseId(Long Id){
+        return courseRepository.findQuestionByCourseId(Id);
+    }
+
 }

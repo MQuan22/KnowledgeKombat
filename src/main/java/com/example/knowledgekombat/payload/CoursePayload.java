@@ -1,9 +1,6 @@
 package com.example.knowledgekombat.payload;
 
-import com.example.knowledgekombat.model.Category;
 import com.example.knowledgekombat.model.Question;
-import com.example.knowledgekombat.model.Topic;
-import com.example.knowledgekombat.model.University;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +13,7 @@ public class CoursePayload {
     private String university;
     private String category;
 
-    private List<Topic> topics = new ArrayList<>();
+    private List<Question> questions = new ArrayList<>();
     public CoursePayload(){}
 
     public String getName() {
@@ -67,11 +64,11 @@ public class CoursePayload {
         this.category = category;
     }
 
-    public List<Topic> getTopics() {
-        return topics;
+    public List<Question> getQuestions() {
+        return questions;
     }
 
-    public void setTopics(List<Topic> topics) {
-        this.topics = topics;
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 }

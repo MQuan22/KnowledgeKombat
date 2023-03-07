@@ -1,6 +1,7 @@
 package com.example.knowledgekombat.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -14,6 +15,7 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @JsonIgnore
     private Long id;
 
     private String name;
@@ -27,8 +29,11 @@ public class Course {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ScoreReport> scoreReports = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Topic> topics;
+    @JsonIgnoreProperties("course")
+    @OneToMany(mappedBy = "course",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Question> questions = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -47,7 +52,7 @@ public class Course {
     private Category category = new Category();
 
     public Course(){
-        topics = new ArrayList<>();
+        questions = new ArrayList<>();
     }
     public Long getId() {
         return id;
@@ -121,17 +126,18 @@ public class Course {
         this.category = category;
     }
 
-    public List<Topic> getTopics() {
-        return topics;
+    public List<Question> getQuestions() {
+        return questions;
     }
 
-    public void setTopics(List<Topic> topics) {
-//        topics.forEach(topic -> topic.setCourseId(this.getId()));
-//        if(this.topics == null){
-//            topics = new ArrayList<>();
-//        }
-//        this.topics.clear();
-//        this.topics.addAll(topics);
-        this.topics = topics;
+    public void setQuestions(List<Question> questions) {
+        questions.forEach(question -> question.setCourse(this));
+        if(this.questions == null){
+            questions = new ArrayList<>();
+        }
+        this.questions.clear();
+        this.questions.addAll(questions);
+//        questions.forEach(question -> question.setAnswers(question.getAnswers()));
+//        this.questions = questions;
     }
 }
