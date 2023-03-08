@@ -4,12 +4,15 @@ import com.example.knowledgekombat.model.Answer;
 import com.example.knowledgekombat.model.Course;
 import com.example.knowledgekombat.model.Question;
 import com.example.knowledgekombat.payload.CoursePayload;
+import com.example.knowledgekombat.payload.CourseResponse;
 import com.example.knowledgekombat.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/course")
@@ -33,5 +36,23 @@ public class CourseController {
     public ResponseEntity<?> getQuestionsByCourseId(@PathVariable(name = "id")Long courseId){
         List<Question> questionList = courseService.getQuestionsByCourseId(courseId);
         return ResponseEntity.ok(questionList);
+    }
+    @PostMapping("/editCourse/{id}")
+    public ResponseEntity<?> editCourse(@RequestBody CoursePayload coursePayload, @PathVariable(name = "id")Long courseId){
+
+        return ResponseEntity.ok(null);
+    }
+
+    @GetMapping("/getCourses")
+    public ResponseEntity<?> getAllTrips() {
+
+        List<Course> courses = courseService.getAllCourses();
+//        List<CoursePayload> courseResponse = courses
+//                .stream()
+//                .map(t -> t.toResponse())
+//                .collect(Collectors.toList());
+
+//        PagingResponse<TripResponse> response = new PagingResponse<>(page, size, trips.getTotalPages(), tripResponses);
+        return ResponseEntity.ok(courses);
     }
 }

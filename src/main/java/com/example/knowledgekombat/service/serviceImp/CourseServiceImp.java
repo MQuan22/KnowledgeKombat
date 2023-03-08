@@ -6,6 +6,9 @@ import com.example.knowledgekombat.repository.*;
 import com.example.knowledgekombat.security.UserPrincipal;
 import com.example.knowledgekombat.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -38,7 +41,7 @@ public class CourseServiceImp implements CourseService {
                 .getAuthentication()
                 .getPrincipal();
         User author = userRepository.findById(userPrincipal.getId()).orElseThrow(
-                () -> new UsernameNotFoundException("Unauthorized admin"));
+                () -> new UsernameNotFoundException("Unauthorized"));
         Category category = categoryRepository.findByName(coursePayload.getCategory()).get();
         University university = uniRepository.findByName(coursePayload.getUniversity()).get();
         Course course = new Course();
@@ -68,4 +71,28 @@ public class CourseServiceImp implements CourseService {
         return courseRepository.findQuestionByCourseId(Id);
     }
 
+    @Override
+    @Transactional
+    public Course editCourse(CoursePayload coursePayload, Long courseId) {
+        Category category = categoryRepository.findByName(coursePayload.getCategory()).get();
+        University university = uniRepository.findByName(coursePayload.getUniversity()).get();
+        Course course = courseRepository.findById(courseId).orElseThrow(
+                () -> new UsernameNotFoundException("Can't find Course"));
+        course.setName(coursePayload.getName());
+        course.setCategory(category);
+        course.setStatus(coursePayload.isStatus());
+        course.setDescription(coursePayload.getDescription());
+        course.setImage(coursePayload.getImage());
+        course.setUniversity(university);
+        course.setQuestions(coursePayload.getQuestions());
+        courseRepository.save(course);
+        return course;
+    }
+
+    @Override
+    @Transactional
+    public List<Course> getAllCourses(){
+        List<Course> courses = courseRepository.findAll();
+        return courses;
+    }
 }
