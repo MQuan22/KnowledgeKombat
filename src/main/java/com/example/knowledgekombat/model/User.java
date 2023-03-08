@@ -25,7 +25,8 @@ public class User {
     @Column(nullable = false)
     private String email;
 
-    private String imageUrl;
+    @Column(name = "image_url")
+    private byte[] imageUrl;
 
     @Column(nullable = false)
     private Boolean emailVerified = false;
@@ -123,11 +124,11 @@ public class User {
         this.email = email;
     }
 
-    public String getImageUrl() {
+    public byte[] getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public void setImageUrl(byte[] imageUrl) {
         this.imageUrl = imageUrl;
     }
 
