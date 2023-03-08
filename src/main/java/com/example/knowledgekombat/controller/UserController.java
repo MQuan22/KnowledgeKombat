@@ -6,16 +6,39 @@ import com.example.knowledgekombat.model.User;
 import com.example.knowledgekombat.repository.UserRepository;
 import com.example.knowledgekombat.security.CurrentUser;
 import com.example.knowledgekombat.security.UserPrincipal;
+import com.example.knowledgekombat.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.net.URI;
 
 @RestController
+@RequestMapping("/api/users")
+@Api(tags = "User Controller")
 public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    private final UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/user/me")
     @PreAuthorize("hasRole('USER')")
@@ -23,4 +46,35 @@ public class UserController {
         return userRepository.findById(userPrincipal.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
     }
+    @PostMapping("/{userId}/image")
+    @ApiOperation(value = "Upload user image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Image uploaded successfully"),
+            @ApiResponse(code = 400, message = "Invalid request"),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 500, message = "Server error")
+    })
+    public ResponseEntity<String> uploadUserImage(
+                @PathVariable("userId") Long userId,
+                @RequestParam("image") MultipartFile image,
+                HttpServletRequest request
+        ) {
+            try {
+                // Save image to database
+                userService.saveUserImage(userId, image.getBytes() );
+
+                UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString())
+                        .path("/image")
+                        .queryParam("userId", userId);
+
+                URI uri = builder.build(true).toUri();
+
+                return ResponseEntity.ok(uri.toString());
+            } catch (IOException e) {
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to upload image", e);
+            }
+        // ...
+
+    }
+
 }
