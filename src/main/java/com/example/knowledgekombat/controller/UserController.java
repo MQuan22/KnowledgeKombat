@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -74,5 +75,22 @@ public class UserController {
         // ...
 
     }
+
+    @GetMapping("/{userId}/image")
+    @ApiOperation(value = "Get user image")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success", response = byte[].class),
+            @ApiResponse(code = 400, message = "Invalid request"),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 500, message = "Server error")
+    })
+    public ResponseEntity<byte[]> getUserImage(@PathVariable("userId") Long userId) {
+        byte[] image = userService.getUserImage(userId);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_PNG);
+        headers.setContentLength(image.length);
+        return new ResponseEntity<>(image, headers, HttpStatus.OK);
+    }
+
 
 }
