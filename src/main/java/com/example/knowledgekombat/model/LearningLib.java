@@ -20,7 +20,8 @@ public class LearningLib {
 
     private boolean status;
 
-    private String image;
+    @Lob
+    private byte[] image;
 
     private String description;
 
@@ -61,12 +62,20 @@ public class LearningLib {
         this.status = status;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getDescription() {

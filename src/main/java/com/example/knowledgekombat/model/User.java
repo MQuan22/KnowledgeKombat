@@ -26,6 +26,7 @@ public class User {
     private String email;
 
     @Column(name = "image_url")
+    @Lob
     private byte[] imageUrl;
 
     @Column(nullable = false)

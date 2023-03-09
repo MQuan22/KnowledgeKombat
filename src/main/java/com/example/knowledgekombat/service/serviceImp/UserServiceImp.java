@@ -22,7 +22,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Transactional
-    public void saveUserImage(Long id, byte[] image){
+    public void saveUserImage(byte[] image){
         UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder
                 .getContext()
                 .getAuthentication()
@@ -30,7 +30,7 @@ public class UserServiceImp implements UserService {
         User author = userRepository.findById(userPrincipal.getId()).orElseThrow(
                 () -> new UsernameNotFoundException("Unauthorized admin"));
 
-        User user = userRepository.findById(id).get();
+        User user = userRepository.findById(author.getId()).get();
         user.setImageUrl(image);
         userRepository.save(user);
     }

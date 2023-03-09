@@ -2,13 +2,15 @@ package com.example.knowledgekombat.payload;
 
 import com.example.knowledgekombat.model.Question;
 
+import javax.persistence.Lob;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CoursePayload {
     private String name;
     private boolean status;
-    private String Image;
+    @Lob
+    private byte[] image;
     private String description;
     private String university;
     private String category;
@@ -32,12 +34,12 @@ public class CoursePayload {
         this.status = status;
     }
 
-    public String getImage() {
-        return Image;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setImage(String image) {
-        Image = image;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public String getDescription() {

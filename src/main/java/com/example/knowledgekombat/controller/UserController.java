@@ -46,7 +46,7 @@ public class UserController {
         return userRepository.findById(userPrincipal.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
     }
-    @PostMapping("/{userId}/image")
+    @PostMapping("/image")
     @ApiOperation(value = "Upload user image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Image uploaded successfully"),
@@ -55,17 +55,15 @@ public class UserController {
             @ApiResponse(code = 500, message = "Server error")
     })
     public ResponseEntity<String> uploadUserImage(
-                @PathVariable("userId") Long userId,
                 @RequestParam("image") MultipartFile image,
                 HttpServletRequest request
         ) {
             try {
                 // Save image to database
-                userService.saveUserImage(userId, image.getBytes() );
+                userService.saveUserImage(image.getBytes());
 
                 UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString())
-                        .path("/image")
-                        .queryParam("userId", userId);
+                        .path("/image");
 
                 URI uri = builder.build(true).toUri();
 

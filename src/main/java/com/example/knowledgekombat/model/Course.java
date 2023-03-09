@@ -22,8 +22,8 @@ public class Course {
     private String name;
 
     private boolean status;
-
-    private String image;
+    @Lob
+    private byte[] image;
 
     private String description;
 
@@ -79,11 +79,11 @@ public class Course {
         this.status = status;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
