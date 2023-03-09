@@ -30,7 +30,7 @@ public class SwaggerConfig {
     }
 
     private ApiKey apiKey() {
-        return new ApiKey("", HttpHeaders.AUTHORIZATION, In.HEADER.name());
+        return new ApiKey("Bearer", HttpHeaders.AUTHORIZATION, In.HEADER.name());
     }
 
     private SecurityContext securityContext() {
