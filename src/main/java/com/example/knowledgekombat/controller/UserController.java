@@ -47,6 +47,7 @@ public class UserController {
         return userRepository.findById(userPrincipal.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
     }
+
     @PostMapping("/image")
     @ApiOperation(value = "Upload user image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiResponses(value = {
@@ -56,22 +57,22 @@ public class UserController {
             @ApiResponse(code = 500, message = "Server error")
     })
     public ResponseEntity<String> uploadUserImage(
-                @RequestParam("image") MultipartFile image,
-                HttpServletRequest request
-        ) {
-            try {
-                // Save image to database
-                userService.saveUserImage(image.getBytes());
+            @RequestParam("image") MultipartFile image,
+            HttpServletRequest request
+    ) {
+        try {
+            // Save image to database
+            userService.saveUserImage(image.getBytes());
 
-                UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString())
-                        .path("/image");
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString())
+                    .path("/image");
 
-                URI uri = builder.build(true).toUri();
+            URI uri = builder.build(true).toUri();
 
-                return ResponseEntity.ok(uri.toString());
-            } catch (IOException e) {
-                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to upload image", e);
-            }
+            return ResponseEntity.ok(uri.toString());
+        } catch (IOException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to upload image", e);
+        }
         // ...
 
     }
@@ -91,6 +92,5 @@ public class UserController {
         headers.setContentLength(image.length);
         return new ResponseEntity<>(image, headers, HttpStatus.OK);
     }
-
-
 }
+
