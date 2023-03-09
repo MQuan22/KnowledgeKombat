@@ -34,4 +34,17 @@ public class UserServiceImp implements UserService {
         user.setImageUrl(image);
         userRepository.save(user);
     }
+
+    @Transactional
+    public byte[] getUserImage(Long uid){
+        UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+        User author = userRepository.findById(userPrincipal.getId()).orElseThrow(
+                () -> new UsernameNotFoundException("Unauthorized!"));
+
+        User user = userRepository.findById(uid).get();
+        return user.getImageUrl();
+    }
 }
