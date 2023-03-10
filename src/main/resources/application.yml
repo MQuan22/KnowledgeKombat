@@ -7,6 +7,9 @@ spring:
     username: adminKK
     password: KnowledgeKombat
     driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 18.143.173.183
+    port: 6379
 
   jpa:
     show-sql: true
@@ -61,3 +64,4 @@ app:
       - http://localhost:3000/oauth2/redirect
       - myandroidapp://oauth2/redirect
       - myiosapp://oauth2/redirect
+

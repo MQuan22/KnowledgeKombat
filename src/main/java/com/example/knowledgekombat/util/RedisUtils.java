@@ -6,7 +6,7 @@ public class RedisUtils {
     private RedisLock lock;
 
     public RedisUtils() {
-        this.jedis = new Jedis("localhost", 6379);
+        this.jedis = new Jedis("18.143.173.183", 6379);
         this.lock = new RedisLock("myLockKey", jedis);
     }
 
