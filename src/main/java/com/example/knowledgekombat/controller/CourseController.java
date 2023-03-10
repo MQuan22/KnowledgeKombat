@@ -46,7 +46,7 @@ public class CourseController {
     @GetMapping("/getCourses")
     public ResponseEntity<?> getAllTrips() {
 
-        List<Course> courses = courseService.getAllCourses();
+        List<CourseResponse> courses = courseService.getAllCourses();
 //        List<CoursePayload> courseResponse = courses
 //                .stream()
 //                .map(t -> t.toResponse())

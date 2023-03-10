@@ -17,6 +17,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     List<Question> findQuestionByCourseId(Long courseId);
 
     Optional<Course> findById(Long CourseId);
-    @Query("SELECT c FROM Course c")
+    @Query("FROM Course c WHERE c.status = true")
     List<Course> findAll();
 }

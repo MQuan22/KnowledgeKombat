@@ -9,8 +9,8 @@ import java.util.List;
 public class CoursePayload {
     private String name;
     private boolean status;
-    @Lob
-    private byte[] image;
+//    @Lob
+//    private byte[] image;
     private String description;
     private String university;
     private String category;
@@ -34,13 +34,13 @@ public class CoursePayload {
         this.status = status;
     }
 
-    public byte[] getImage() {
-        return image;
-    }
+//    public byte[] getImage() {
+//        return image;
+//    }
 
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
+//    public void setImage(byte[] image) {
+//        this.image = image;
+//    }
 
     public String getDescription() {
         return description;

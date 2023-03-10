@@ -2,6 +2,7 @@ package com.example.knowledgekombat.service.serviceImp;
 
 import com.example.knowledgekombat.model.*;
 import com.example.knowledgekombat.payload.CoursePayload;
+import com.example.knowledgekombat.payload.CourseResponse;
 import com.example.knowledgekombat.repository.*;
 import com.example.knowledgekombat.security.UserPrincipal;
 import com.example.knowledgekombat.service.CourseService;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CourseServiceImp implements CourseService {
@@ -49,7 +51,7 @@ public class CourseServiceImp implements CourseService {
         course.setCategory(category);
         course.setStatus(coursePayload.isStatus());
         course.setDescription(coursePayload.getDescription());
-        course.setImage(coursePayload.getImage());
+//        course.setImage(coursePayload.getImage());
         course.setUser(author);
         course.setUniversity(university);
         course.setQuestions(coursePayload.getQuestions());
@@ -82,7 +84,7 @@ public class CourseServiceImp implements CourseService {
         course.setCategory(category);
         course.setStatus(coursePayload.isStatus());
         course.setDescription(coursePayload.getDescription());
-        course.setImage(coursePayload.getImage());
+//        course.setImage(coursePayload.getImage());
         course.setUniversity(university);
         course.setQuestions(coursePayload.getQuestions());
         courseRepository.save(course);
@@ -91,8 +93,12 @@ public class CourseServiceImp implements CourseService {
 
     @Override
     @Transactional
-    public List<Course> getAllCourses(){
+    public List<CourseResponse> getAllCourses(){
         List<Course> courses = courseRepository.findAll();
-        return courses;
+        List<CourseResponse> responses = courses
+                .stream()
+                .map(course -> course.mapping())
+                .collect(Collectors.toList());
+        return responses;
     }
 }
