@@ -9,6 +9,7 @@ import com.example.knowledgekombat.payload.AuthResponse;
 import com.example.knowledgekombat.payload.LoginRequest;
 import com.example.knowledgekombat.payload.SignUpRequest;
 import com.example.knowledgekombat.security.TokenProvider;
+import com.example.knowledgekombat.util.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -46,6 +47,16 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
+        RedisUtils redisUtils = new RedisUtils();
+
+        // Try to retrieve the authentication token from Redis cache
+        String authToken = redisUtils.GetValue(loginRequest.getEmail());
+        if (authToken != null) {
+            // If the authentication token exists in Redis cache, return it
+            return ResponseEntity.ok(new AuthResponse(authToken));
+        }
+
+
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getEmail(),
@@ -54,9 +65,15 @@ public class AuthController {
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        authToken = tokenProvider.createToken(authentication);
 
-        String token = tokenProvider.createToken(authentication);
-        return ResponseEntity.ok(new AuthResponse(token));
+        // Store the authentication token in Redis cache
+        redisUtils.SetKeyValue(loginRequest.getEmail(), authToken);
+        redisUtils.SetExpire(loginRequest.getEmail(), 3600); // expire after 1 hour
+
+
+        return ResponseEntity.ok(new AuthResponse(authToken));
+
     }
 
     @PostMapping("/signup")
