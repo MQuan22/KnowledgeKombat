@@ -1,6 +1,7 @@
 package com.example.knowledgekombat.model;
 
 import com.example.knowledgekombat.payload.CoursePayload;
+import com.example.knowledgekombat.payload.CourseResponse;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.OnDelete;
@@ -141,8 +142,15 @@ public class Course {
 //        questions.forEach(question -> question.setAnswers(question.getAnswers()));
 //        this.questions = questions;
     }
-//    public void mapping(CoursePayload request){
-//        this.setQuestions(request.getQuestions());
-//        this.set
-//    }
+    public CourseResponse mapping(){
+        CourseResponse response = new CourseResponse();
+        response.setName(this.getName());
+        response.setCategory(this.getCategory().getName());
+        response.setDescription(this.getDescription());
+        response.setUniversity(this.getUniversity().getName());
+        response.setStatus(this.isStatus());
+        response.setQuestions(this.getQuestions());
+        response.setId(this.getId());
+        return response;
+    }
 }
