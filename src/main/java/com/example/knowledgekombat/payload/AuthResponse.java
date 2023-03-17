@@ -2,9 +2,15 @@ package com.example.knowledgekombat.payload;
 
 public class AuthResponse {
     private String accessToken;
+    private String redis;
     private String tokenType = "Bearer";
 
     public AuthResponse(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public AuthResponse(String redis,String accessToken) {
+        this.redis = redis;
         this.accessToken = accessToken;
     }
 

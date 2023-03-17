@@ -8,7 +8,7 @@ spring:
     password: KnowledgeKombat
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
-    host: 18.143.173.183
+    host: "18.143.173.183"
     port: 6379
     timeout : 30
 
