@@ -86,7 +86,7 @@ public class CourseServiceImp implements CourseService {
         course.setDescription(coursePayload.getDescription());
 //        course.setImage(coursePayload.getImage());
         course.setUniversity(university);
-        course.setQuestions(coursePayload.getQuestions());
+//        course.setQuestions(coursePayload.getQuestions());
         courseRepository.save(course);
         return course;
     }
