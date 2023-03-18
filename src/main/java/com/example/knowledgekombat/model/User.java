@@ -46,7 +46,7 @@ public class User {
     private List<Role> roles = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
-    private List<ScoreReport> scoreReports = new ArrayList<>();
+    private List<User_Course> userCourses = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private List<Transaction> transactions = new ArrayList<>();

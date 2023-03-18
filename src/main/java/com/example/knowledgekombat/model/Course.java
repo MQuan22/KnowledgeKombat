@@ -1,6 +1,5 @@
 package com.example.knowledgekombat.model;
 
-import com.example.knowledgekombat.payload.CoursePayload;
 import com.example.knowledgekombat.payload.CourseResponse;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -29,7 +28,7 @@ public class Course {
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ScoreReport> scoreReports = new ArrayList<>();
+    private List<User_Course> userCourses = new ArrayList<>();
 
     @JsonIgnoreProperties("course")
     @OneToMany(mappedBy = "course",
@@ -96,12 +95,12 @@ public class Course {
         this.description = description;
     }
 
-    public List<ScoreReport> getScoreReports() {
-        return scoreReports;
+    public List<User_Course> getScoreReports() {
+        return userCourses;
     }
 
-    public void setScoreReports(List<ScoreReport> scoreReports) {
-        this.scoreReports = scoreReports;
+    public void setScoreReports(List<User_Course> userCourses) {
+        this.userCourses = userCourses;
     }
 
     public University getUniversity() {

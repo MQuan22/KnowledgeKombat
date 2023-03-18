@@ -1,5 +1,6 @@
 package com.example.knowledgekombat.service.serviceImp;
 
+import com.example.knowledgekombat.exception.CourseNotFoundException;
 import com.example.knowledgekombat.model.*;
 import com.example.knowledgekombat.payload.CoursePayload;
 import com.example.knowledgekombat.payload.CourseResponse;
@@ -100,5 +101,15 @@ public class CourseServiceImp implements CourseService {
                 .map(course -> course.mapping())
                 .collect(Collectors.toList());
         return responses;
+    }
+    @Override
+    @Transactional
+    public CourseResponse getCourseById(Long id){
+        Course course = courseRepository.findById(id).orElseThrow(
+                () -> new CourseNotFoundException("Course with ID \""+ id + "\" doesn't exist")
+        );
+        CourseResponse response = course.mapping();
+        return response;
+
     }
 }

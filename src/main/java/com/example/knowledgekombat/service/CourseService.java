@@ -15,4 +15,5 @@ public interface CourseService {
     public List<Question> getQuestionsByCourseId(Long Id);
     public Course editCourse(CoursePayload coursePayload, Long courseId);
     public List<CourseResponse> getAllCourses();
+    public CourseResponse getCourseById(Long Id);
 }

@@ -44,7 +44,7 @@ public class CourseController {
     }
 
     @GetMapping("/getCourses")
-    public ResponseEntity<?> getAllTrips() {
+    public ResponseEntity<?> getCourses() {
 
         List<CourseResponse> courses = courseService.getAllCourses();
 //        List<CoursePayload> courseResponse = courses
@@ -54,5 +54,10 @@ public class CourseController {
 
 //        PagingResponse<TripResponse> response = new PagingResponse<>(page, size, trips.getTotalPages(), tripResponses);
         return ResponseEntity.ok(courses);
+    }
+    @GetMapping("/getCourse/{id}")
+    public ResponseEntity<?> getCourseById(@PathVariable(name="id")Long courseId){
+        CourseResponse response = courseService.getCourseById(courseId);
+        return ResponseEntity.ok(response);
     }
 }
