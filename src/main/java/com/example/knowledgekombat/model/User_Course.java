@@ -1,5 +1,6 @@
 package com.example.knowledgekombat.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -15,8 +16,9 @@ public class User_Course {
     @Column(name = "id")
     private Long id;
 
-    private int score;
+    private float score;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private Date updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -39,11 +41,11 @@ public class User_Course {
         this.id = id;
     }
 
-    public int getScore() {
+    public float getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(float score) {
         this.score = score;
     }
 

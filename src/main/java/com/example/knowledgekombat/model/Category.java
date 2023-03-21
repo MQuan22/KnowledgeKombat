@@ -1,5 +1,7 @@
 package com.example.knowledgekombat.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -13,8 +15,10 @@ public class Category {
 
     private String name;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private Date createdAt;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private Date updatedAt;
 
     public Long getId() {

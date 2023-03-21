@@ -25,17 +25,14 @@ public class Question {
 
     private String content;
 
-    private int timeLimit;
-
     private String answerOption;
 
     private String media;
 
     private Date updatedAt;
 
-    public Question(String content, int timeLimit, String answerOption, String media, Date updatedAt, List<Answer> answers) {
+    public Question(String content, String answerOption, String media, Date updatedAt, List<Answer> answers) {
         this.content = content;
-        this.timeLimit = timeLimit;
         this.answerOption = answerOption;
         this.media = media;
         this.updatedAt = updatedAt;
@@ -75,14 +72,6 @@ public class Question {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public int getTimeLimit() {
-        return timeLimit;
-    }
-
-    public void setTimeLimit(int timeLimit) {
-        this.timeLimit = timeLimit;
     }
 
     public String getAnswerOption() {

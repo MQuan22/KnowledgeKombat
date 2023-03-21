@@ -14,7 +14,7 @@ public class CoursePayload {
     private String description;
     private String university;
     private String category;
-
+    private int timeLimit;
     private List<Question> questions = new ArrayList<>();
     public CoursePayload(){}
 
@@ -34,6 +34,13 @@ public class CoursePayload {
         this.status = status;
     }
 
+    public int getTimeLimit() {
+        return timeLimit;
+    }
+
+    public void setTimeLimit(int timeLimit) {
+        this.timeLimit = timeLimit;
+    }
 //    public byte[] getImage() {
 //        return image;
 //    }
