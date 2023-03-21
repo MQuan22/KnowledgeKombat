@@ -2,6 +2,7 @@ package com.example.knowledgekombat.service.serviceImp;
 
 import com.example.knowledgekombat.exception.CourseNotFoundException;
 import com.example.knowledgekombat.model.*;
+import com.example.knowledgekombat.payload.AnswerRequest;
 import com.example.knowledgekombat.payload.CoursePayload;
 import com.example.knowledgekombat.payload.CourseResponse;
 import com.example.knowledgekombat.repository.*;
@@ -27,13 +28,15 @@ public class CourseServiceImp implements CourseService {
     private final CategoryRepository categoryRepository;
     private final UniRepository uniRepository;
     private final QuestionRepository questionRepository;
+    private final AnswerRepository answerRepository;
     @Autowired
-    public CourseServiceImp(CourseRepository courseRepository, UserRepository userRepository, CategoryRepository categoryRepository, UniRepository uniRepository, QuestionRepository questionRepository){
+    public CourseServiceImp(CourseRepository courseRepository, UserRepository userRepository, CategoryRepository categoryRepository, UniRepository uniRepository, QuestionRepository questionRepository, AnswerRepository answerRepository){
         this.courseRepository = courseRepository;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
         this.uniRepository = uniRepository;
         this.questionRepository = questionRepository;
+        this.answerRepository = answerRepository;
     }
 
     @Override
@@ -56,6 +59,7 @@ public class CourseServiceImp implements CourseService {
         course.setUser(author);
         course.setUniversity(university);
         course.setQuestions(coursePayload.getQuestions());
+        course.setTimeLimit(coursePayload.getTimeLimit());
         courseRepository.save(course);
 //        questionRepository.saveAll(coursePayload.getQuestions());
         return course;
@@ -112,4 +116,15 @@ public class CourseServiceImp implements CourseService {
         return response;
 
     }
+    @Override
+    @Transactional
+    public CourseResponse deleteCourseById(Long id){
+        Course course = courseRepository.findById(id).orElseThrow(
+                () -> new CourseNotFoundException("Course with ID \""+ id + "\" doesn't exist")
+        );
+        courseRepository.deleteById(id);
+        CourseResponse response = course.mapping();
+        return response;
+    }
+
 }

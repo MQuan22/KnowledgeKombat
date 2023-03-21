@@ -60,4 +60,9 @@ public class CourseController {
         CourseResponse response = courseService.getCourseById(courseId);
         return ResponseEntity.ok(response);
     }
+    @DeleteMapping("/deleteCourse/{id}")
+    public ResponseEntity<?> deleteCourseById(@PathVariable(name="id")Long courseId){
+        CourseResponse response = courseService.deleteCourseById(courseId);
+        return ResponseEntity.ok(response);
+    }
 }

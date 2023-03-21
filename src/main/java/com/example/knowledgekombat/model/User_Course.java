@@ -15,7 +15,7 @@ public class User_Course {
     @Column(name = "id")
     private Long id;
 
-    private int score;
+    private float score;
 
     private Date updatedAt;
 
@@ -39,11 +39,11 @@ public class User_Course {
         this.id = id;
     }
 
-    public int getScore() {
+    public float getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(float score) {
         this.score = score;
     }
 

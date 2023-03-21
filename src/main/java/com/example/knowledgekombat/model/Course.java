@@ -26,6 +26,8 @@ public class Course {
     private byte[] image;
 
     private String description;
+    private String courseType;
+    private int timeLimit;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<User_Course> userCourses = new ArrayList<>();
@@ -131,16 +133,42 @@ public class Course {
         return questions;
     }
 
-    public void setQuestions(List<Question> questions) {
-        questions.forEach(question -> question.setCourse(this));
+    public void setQuestions(List<Question> questionList) {
+        questionList.forEach(question -> question.setCourse(this));
         if(this.questions == null){
-            questions = new ArrayList<>();
+            questionList = new ArrayList<>();
         }
         this.questions.clear();
-        this.questions.addAll(questions);
+        this.questions.addAll(questionList);
 //        questions.forEach(question -> question.setAnswers(question.getAnswers()));
 //        this.questions = questions;
+        System.out.println(this.questions);
     }
+
+    public String getCourseType() {
+        return courseType;
+    }
+
+    public void setCourseType(String courseType) {
+        this.courseType = courseType;
+    }
+
+    public List<User_Course> getUserCourses() {
+        return userCourses;
+    }
+
+    public void setUserCourses(List<User_Course> userCourses) {
+        this.userCourses = userCourses;
+    }
+
+    public int getTimeLimit() {
+        return timeLimit;
+    }
+
+    public void setTimeLimit(int timeLimit) {
+        this.timeLimit = timeLimit;
+    }
+
     public CourseResponse mapping(){
         CourseResponse response = new CourseResponse();
         response.setName(this.getName());
