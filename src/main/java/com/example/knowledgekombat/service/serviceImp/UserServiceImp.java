@@ -47,4 +47,17 @@ public class UserServiceImp implements UserService {
         User user = userRepository.findById(uid).get();
         return user.getImageUrl();
     }
+
+    @Transactional
+    public int getUserCount(){
+        UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+        User author = userRepository.findById(userPrincipal.getId()).orElseThrow(
+                () -> new UsernameNotFoundException("Unauthorized!"));
+
+        int userCount = userRepository.findAll().size();
+        return userCount;
+    }
 }
