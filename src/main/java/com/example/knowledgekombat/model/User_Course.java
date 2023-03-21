@@ -1,5 +1,6 @@
 package com.example.knowledgekombat.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -17,6 +18,7 @@ public class User_Course {
 
     private float score;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private Date updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)

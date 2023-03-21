@@ -1,12 +1,10 @@
 package com.example.knowledgekombat.controller;
 
 import com.example.knowledgekombat.model.Answer;
+import com.example.knowledgekombat.payload.AnswerRequest;
 import com.example.knowledgekombat.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,9 +18,9 @@ public class AnswerController {
         this.answerService = answerService;
     }
 
-    @PostMapping("/result")
-    public float calculateScore(@RequestBody List<Long> answerList){
-        float result = answerService.calculateScore(answerList);
+    @PostMapping("/result/{courseId}")
+    public float calculateScore(@RequestBody AnswerRequest request, @PathVariable(name="courseId") Long courseId){
+        float result = answerService.calculateScore(request, courseId);
         return result;
     }
 }

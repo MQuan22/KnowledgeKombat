@@ -11,7 +11,7 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
     @Query("SELECT q FROM Answer q WHERE q.id = ?1")
     Optional<Answer> findById(Long Id);
     @Query("SELECT COUNT (a) FROM Answer a WHERE a.question.course.id =?1 AND a.isCorrect = true")
-    int countTotal(Long courseId);
+    Long countTotal(Long courseId);
 
 
 }

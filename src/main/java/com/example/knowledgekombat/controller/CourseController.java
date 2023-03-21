@@ -3,8 +3,10 @@ package com.example.knowledgekombat.controller;
 import com.example.knowledgekombat.model.Answer;
 import com.example.knowledgekombat.model.Course;
 import com.example.knowledgekombat.model.Question;
+import com.example.knowledgekombat.model.User_Course;
 import com.example.knowledgekombat.payload.CoursePayload;
 import com.example.knowledgekombat.payload.CourseResponse;
+import com.example.knowledgekombat.payload.ReportResponse;
 import com.example.knowledgekombat.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -63,6 +65,11 @@ public class CourseController {
     @DeleteMapping("/deleteCourse/{id}")
     public ResponseEntity<?> deleteCourseById(@PathVariable(name="id")Long courseId){
         CourseResponse response = courseService.deleteCourseById(courseId);
+        return ResponseEntity.ok(response);
+    }
+    @GetMapping("/getReport/{id}")
+    public ResponseEntity<?> getReportById(@PathVariable(name="id")Long courseId){
+        List<ReportResponse> response = courseService.getReportByCourseId(courseId);
         return ResponseEntity.ok(response);
     }
 }

@@ -5,6 +5,7 @@ import com.example.knowledgekombat.model.*;
 import com.example.knowledgekombat.payload.AnswerRequest;
 import com.example.knowledgekombat.payload.CoursePayload;
 import com.example.knowledgekombat.payload.CourseResponse;
+import com.example.knowledgekombat.payload.ReportResponse;
 import com.example.knowledgekombat.repository.*;
 import com.example.knowledgekombat.security.UserPrincipal;
 import com.example.knowledgekombat.service.CourseService;
@@ -28,15 +29,16 @@ public class CourseServiceImp implements CourseService {
     private final CategoryRepository categoryRepository;
     private final UniRepository uniRepository;
     private final QuestionRepository questionRepository;
-    private final AnswerRepository answerRepository;
+    private final UserCourseRepository userCourseRepository;
+
     @Autowired
-    public CourseServiceImp(CourseRepository courseRepository, UserRepository userRepository, CategoryRepository categoryRepository, UniRepository uniRepository, QuestionRepository questionRepository, AnswerRepository answerRepository){
+    public CourseServiceImp(CourseRepository courseRepository, UserRepository userRepository, CategoryRepository categoryRepository, UniRepository uniRepository, QuestionRepository questionRepository, UserCourseRepository userCourseRepository){
         this.courseRepository = courseRepository;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
         this.uniRepository = uniRepository;
         this.questionRepository = questionRepository;
-        this.answerRepository = answerRepository;
+        this.userCourseRepository = userCourseRepository;
     }
 
     @Override
@@ -84,7 +86,8 @@ public class CourseServiceImp implements CourseService {
         Category category = categoryRepository.findByName(coursePayload.getCategory()).get();
         University university = uniRepository.findByName(coursePayload.getUniversity()).get();
         Course course = courseRepository.findById(courseId).orElseThrow(
-                () -> new UsernameNotFoundException("Can't find Course"));
+                () -> new CourseNotFoundException("Course with ID \""+ courseId + "\" doesn't exist"
+                ));
         course.setName(coursePayload.getName());
         course.setCategory(category);
         course.setStatus(coursePayload.isStatus());
@@ -126,5 +129,20 @@ public class CourseServiceImp implements CourseService {
         CourseResponse response = course.mapping();
         return response;
     }
-
+    @Override
+    @Transactional
+    public List<ReportResponse> getReportByCourseId(Long courseId){
+        List<User_Course> list = courseRepository.findReportByCourseId(courseId);
+        List<ReportResponse> responses = list
+                .stream()
+                .map(user_course -> {
+                    ReportResponse report = new ReportResponse();
+                    report.setUsername(user_course.getUser().getName());
+                    report.setDate(user_course.getUpdatedAt());
+                    report.setImage(user_course.getUser().getImageUrl());
+                    report.setScore(user_course.getScore());
+                    return report;
+                }).collect(Collectors.toList());
+        return responses;
+    }
 }

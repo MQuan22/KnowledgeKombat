@@ -1,5 +1,6 @@
 package com.example.knowledgekombat.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -15,6 +16,7 @@ public class Transaction {
     @Column(name = "id")
     private Long id;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private Date datetime;
 
     private boolean status;

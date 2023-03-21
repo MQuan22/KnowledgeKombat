@@ -7,6 +7,7 @@ import com.example.knowledgekombat.model.User_Course;
 import com.example.knowledgekombat.payload.AnswerRequest;
 import com.example.knowledgekombat.payload.CoursePayload;
 import com.example.knowledgekombat.payload.CourseResponse;
+import com.example.knowledgekombat.payload.ReportResponse;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -19,4 +20,5 @@ public interface CourseService {
     public List<CourseResponse> getAllCourses();
     public CourseResponse getCourseById(Long Id);
     public CourseResponse deleteCourseById(Long id);
+    public List<ReportResponse> getReportByCourseId(Long courseId);
 }
