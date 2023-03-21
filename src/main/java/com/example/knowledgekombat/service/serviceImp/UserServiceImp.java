@@ -2,6 +2,7 @@ package com.example.knowledgekombat.service.serviceImp;
 
 import com.example.knowledgekombat.model.Course;
 import com.example.knowledgekombat.model.User;
+import com.example.knowledgekombat.repository.UserCourseRepository;
 import com.example.knowledgekombat.repository.UserRepository;
 import com.example.knowledgekombat.security.UserPrincipal;
 import com.example.knowledgekombat.service.UserService;
@@ -15,10 +16,12 @@ import javax.transaction.Transactional;
 @Service
 public class UserServiceImp implements UserService {
     private final UserRepository userRepository;
+    private final UserCourseRepository userCourseRepository;
 
     @Autowired
-    public UserServiceImp(UserRepository userRepository) {
+    public UserServiceImp(UserRepository userRepository, UserCourseRepository userCourseRepository) {
         this.userRepository = userRepository;
+        this.userCourseRepository = userCourseRepository;
     }
 
     @Transactional
@@ -58,6 +61,20 @@ public class UserServiceImp implements UserService {
                 () -> new UsernameNotFoundException("Unauthorized!"));
 
         int userCount = userRepository.findAll().size();
+        return userCount;
+    }
+
+    @Transactional
+    public int getUserInCourse(){
+        UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+        User author = userRepository.findById(userPrincipal.getId()).orElseThrow(
+                () -> new UsernameNotFoundException("Unauthorized!"));
+
+        int userCount = userCourseRepository.getAllDistinct().size();
+
         return userCount;
     }
 }

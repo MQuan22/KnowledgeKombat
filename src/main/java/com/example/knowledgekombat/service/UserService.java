@@ -6,4 +6,6 @@ public interface UserService {
     public byte[] getUserImage(Long uid);
 
     public int getUserCount();
+
+    public int getUserInCourse();
 }
