@@ -17,7 +17,7 @@ public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @JsonIgnore
+    //@JsonIgnore
     private Long id;
 
     private String content;

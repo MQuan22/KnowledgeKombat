@@ -1,11 +1,10 @@
 package com.example.knowledgekombat.repository;
 
 import com.example.knowledgekombat.model.Answer;
-import com.example.knowledgekombat.model.Question;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
@@ -13,4 +12,6 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
     Optional<Answer> findById(Long Id);
     @Query("SELECT COUNT (a) FROM Answer a WHERE a.question.course.id =?1 AND a.isCorrect = true")
     int countTotal(Long courseId);
+
+
 }
