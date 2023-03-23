@@ -16,7 +16,7 @@ public interface CourseService {
     public Course createCourse(CoursePayload coursePayload);
     public List<Answer> getAnswersByQuestionId(Long Id);
     public List<Question> getQuestionsByCourseId(Long Id);
-    public Course editCourse(CoursePayload coursePayload, Long courseId);
+    public CourseResponse editCourse(CoursePayload coursePayload, Long courseId);
     public List<CourseResponse> getAllCourses();
     public CourseResponse getCourseById(Long Id);
     public CourseResponse deleteCourseById(Long id);

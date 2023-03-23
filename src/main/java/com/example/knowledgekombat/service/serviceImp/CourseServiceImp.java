@@ -82,7 +82,7 @@ public class CourseServiceImp implements CourseService {
 
     @Override
     @Transactional
-    public Course editCourse(CoursePayload coursePayload, Long courseId) {
+    public CourseResponse editCourse(CoursePayload coursePayload, Long courseId) {
         Category category = categoryRepository.findByName(coursePayload.getCategory()).get();
         University university = uniRepository.findByName(coursePayload.getUniversity()).get();
         Course course = courseRepository.findById(courseId).orElseThrow(
@@ -94,9 +94,10 @@ public class CourseServiceImp implements CourseService {
         course.setDescription(coursePayload.getDescription());
 //        course.setImage(coursePayload.getImage());
         course.setUniversity(university);
-//        course.setQuestions(coursePayload.getQuestions());
+        course.setQuestions(coursePayload.getQuestions());
         courseRepository.save(course);
-        return course;
+        CourseResponse response = course.mapping();
+        return response;
     }
 
     @Override

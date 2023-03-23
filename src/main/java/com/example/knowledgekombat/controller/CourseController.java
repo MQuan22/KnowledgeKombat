@@ -41,8 +41,8 @@ public class CourseController {
     }
     @PostMapping("/editCourse/{id}")
     public ResponseEntity<?> editCourse(@RequestBody CoursePayload coursePayload, @PathVariable(name = "id")Long courseId){
-        Course course = courseService.editCourse(coursePayload, courseId);
-        return ResponseEntity.ok(course);
+        CourseResponse courseResponse = courseService.editCourse(coursePayload, courseId);
+        return ResponseEntity.ok(courseResponse);
     }
 
     @GetMapping("/getCourses")

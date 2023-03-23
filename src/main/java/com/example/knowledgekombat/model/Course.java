@@ -34,8 +34,7 @@ public class Course {
 
     @JsonIgnoreProperties("course")
     @OneToMany(mappedBy = "course",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
+            cascade = CascadeType.ALL)
     private List<Question> questions = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -52,6 +51,7 @@ public class Course {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @JsonIgnore
     private Category category = new Category();
 
     public Course(){
