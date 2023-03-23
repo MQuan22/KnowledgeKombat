@@ -32,9 +32,4 @@ public class AdminController {
         return courseAmount;
     }
 
-    @GetMapping("/activeUsers")
-    public int getActiveUsers(){
-        int activeUserAmount = 0;
-        return activeUserAmount;
-    }
 }
